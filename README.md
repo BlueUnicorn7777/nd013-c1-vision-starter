@@ -150,11 +150,10 @@ git clone https://github.com/BlueUnicorn7777/nd013-c1-vision-starter.git
 cd nd013-c1-vision-starter 
 ```
 #### Local Setup and Data
-**Note:Docker Setup**
-I am using local docker setup for this project. Please review and create a docker image as per above [instructions](### Local Setup).
-**Note:Data**
-For this project, I am using the preprocessed data from the classroom workspace. Open your classroom workspace , right click on the data folder and download it as a zip file. Extract the zip file to your local data folder.
-Create a data folder and save this data in training_and_validation folder.
+**Note:Docker Setup**    
+I am using local docker setup for this project. Please review and create a docker image as per above [instructions](### Local Setup).    
+**Note:Data**    
+For this project, I am using the preprocessed data from the classroom workspace. Open your classroom workspace , right click on the data folder and download it as a zip file. Extract the zip file to your local data folder.Create a data folder and save this data in training_and_validation folder.
 
 ```
 mkdir -p data/waymo/training_and_validation
@@ -175,7 +174,7 @@ Run the following commands within the docker container. Copy the URI from the co
 cd app/project
 source jupyterrun.sh
 ```
-**Note:AttributeError** 
+**Note:AttributeError**     
 AttributeError: module 'tensorflow.compat.v2.__internal__' has no attribute 'register_clear_session_function' 
 
 While running classroom docker container , I faced above error. As a work around I edited the /usr/local/lib/python3.8/dist-packages/keras/models.pyfile within the docker container.
@@ -183,8 +182,7 @@ While running classroom docker container , I faced above error. As a work around
 Modify line no 18   
 from – import tensorflow.compat.v2 as tf   
 to –     import tensorflow.compat.v1 as tf   
-
-**This section should contain a quantitative and qualitative description of the dataset. It should include images, charts and other visualizations.**    
+   
 **Image Quality**    
 Looking at the images , we can see that there are varying light conditions – bright day light  , dark  night with street lights and head lamps.
 Also the images are taken during different weather condition like rainy night , foggy day . There are  images distorted with weather conditions , and poor visibility.
@@ -205,8 +203,7 @@ The bicycles distribution looks similar to  pedestrians , with majority of (~170
 
 
 #### Cross validation
-Create the splits 
-**This section should detail the cross validation strategy and justify your approach.**    
+Create the splits   
 To create data splits please run the below command in docker container specifying the --source and --destination directory arguments to the create_splits.py.     
 
 ```
