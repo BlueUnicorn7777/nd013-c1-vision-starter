@@ -190,7 +190,7 @@ to –     import tensorflow.compat.v1 as tf
 This section should contain a quantitative and qualitative description of the dataset. It should include images, charts and other visualizations.
 
 ![Sample Images](images/image1.png)  
-![Class Distribution](images/Class_dist.png)![Cars Distribution](images/Class_dist.png)
+![Class Distribution](images/Class_dist.png)![Cars Distribution](images/cars_dist.png)
 ![Pedestrian Distribution](images/ped_dist.png)![Bicycles Distribution](images/cycle_dist.png)
 
 
