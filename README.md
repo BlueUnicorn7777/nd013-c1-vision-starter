@@ -149,25 +149,22 @@ This section should contain a brief description of the steps to follow to run th
 #### Clone this repository
 ``` 
 git clone https://github.com/BlueUnicorn7777/nd013-c1-vision-starter.git 
-cd nd013-c1-vision-starter
- 
+cd nd013-c1-vision-starter 
 ```
 #### Local Setup and Data
 **Note:Docker Setup**
-I am using local docker setup for this project. Please review and create a docker image as per above instructions.
+I am using local docker setup for this project. Please review and create a docker image as per above instructions. 
 **Note:Data**
 For this project, I am using the preprocessed data from the classroom workspace. Open your classroom workspace , right click on the data folder and download it as a zip file. Extract the zip file to your local data folder.
 Create a data folder and save this data in training_and_validation folder.
 
 ```
 mkdir -p data/waymo/training_and_validation
-
 ```
 run the docker image using below command form host computer.
 
 ```
 source dockerrun.sh
-
 ```
 
 ### Dataset
@@ -180,24 +177,28 @@ Run the following commands within the docker container. Copy the URI from the co
 cd app/project
 source jupyterrun.sh
 ```
-**Note:AttributeError**
-AttributeError: module 'tensorflow.compat.v2.__internal__' has no attribute 'register_clear_session_function'
+**Note:AttributeError** 
+AttributeError: module 'tensorflow.compat.v2.__internal__' has no attribute 'register_clear_session_function' 
 
-While running classroom docker container , I faced following error. As a work around I edited the /usr/local/lib/python3.8/dist-packages/keras/models.pyfile within the docker container.
+While running classroom docker container , I faced above error. As a work around I edited the /usr/local/lib/python3.8/dist-packages/keras/models.pyfile within the docker container.
 
-Modify line no 18
-from – import tensorflow.compat.v2 as tf
-to –     import tensorflow.compat.v1 as tf
+Modify line no 18   
+from – import tensorflow.compat.v2 as tf   
+to –     import tensorflow.compat.v1 as tf   
 
 
 This section should contain a quantitative and qualitative description of the dataset. It should include images, charts and other visualizations.
 
+![Sample Images](images/image1.png)  
+![Class Distribution](images/Class_dist.png)![Cars Distribution](images/Class_dist.png)
+![Pedestrian Distribution](images/ped_dist.png)![Bicycles Distribution](images/cycle_dist.png)
+
 
 
 #### Cross validation
-Create the splits 
+Create the splits   
 To create data splits please run the below command in docker container specifying the source and destination directory arguments to the create_splits.py. 
-This script will split the data set into  training = 75% , validation = 15% and testing = 1% of the data set files. The receptive splits are then iterated over to create symlinks in the train , val and test folders under data folder. 
+This script will split the data set into  training = 75% , validation = 15% and testing = 1% of the data set files. These splits are then iterated over to create symlinks in the train , val and test folders under data folder. 
 I am creating symlinks here instead of moving or copying the files.
 
 ```
