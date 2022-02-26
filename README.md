@@ -144,8 +144,6 @@ python inference_video.py --labelmap_path label_map.pbtxt --model_path experimen
 This section should contain a brief description of the project and what we are trying to achieve. Why is object detection such an important component of self driving car systems?
 
 ### Set up
-This section should contain a brief description of the steps to follow to run the code for this repository.
-
 #### Clone this repository
 ``` 
 git clone https://github.com/BlueUnicorn7777/nd013-c1-vision-starter.git 
@@ -154,7 +152,7 @@ cd nd013-c1-vision-starter
 ```
 #### Local Setup and Data
 **Note:Docker Setup**
-I am using local docker setup for this project. Please review and create a docker image as per above instructions.
+I am using local docker setup for this project. Please review and create a docker image as per above [instructions](### Local Setup).
 **Note:Data**
 For this project, I am using the preprocessed data from the classroom workspace. Open your classroom workspace , right click on the data folder and download it as a zip file. Extract the zip file to your local data folder.
 Create a data folder and save this data in training_and_validation folder.
@@ -189,17 +187,28 @@ Modify line no 18
 from – import tensorflow.compat.v2 as tf
 to –     import tensorflow.compat.v1 as tf
 
+**This section should contain a quantitative and qualitative description of the dataset. It should include images, charts and other visualizations.**    
 
-This section should contain a quantitative and qualitative description of the dataset. It should include images, charts and other visualizations.
-
+**Image Quality**    
+Looking at the images , we can see that there are varying light conditions – bright day light  , dark  night with street lights and head lamps.
+Also the images are taken during different weather condition like rainy night , foggy day . There are  images distorted with weather conditions , and poor visibility.
+The images could be in a crowded city environment or highway driving with less clutter of buildings and pedestrians.    
+    
+**Class Distribution**    
+Looking at the histogram of classes over some random 20000 images we can see that we have most labels associated with cars and fair amount of labels are for pedestrians.  There are very few number of bicycles present in these images.    
+    
+There are  ~ 2200 or so images with no cars at all.  Quite large number of images (~1500 each ) have 10,20 or 30 cars present. Few images have very large >60  no of cars present.     
+    
+Most images >12000 or so images there are no pedestrians present. But fairly low number of images have between 10 and 25  pedestrians. Some images the count can go as high as > 40 or so.    
+    
+The bicycles distribution looks similar to  pedestrians , with majority of (~17000 ) images without bicycles. A very few images with 1 to 6 bicycles present.    
+    
 
 
 #### Cross validation
 Create the splits 
-To create data splits please run the below command in docker container specifying the source and destination directory arguments to the create_splits.py. 
-This script will split the data set into  training = 75% , validation = 15% and testing = 1% of the data set files. The receptive splits are then iterated over to create symlinks in the train , val and test folders under data folder. 
-I am creating symlinks here instead of moving or copying the files.
-
+**This section should detail the cross validation strategy and justify your approach.**    
+To create data splits please run the below command in docker container specifying the --source and --destination directory arguments to the create_splits.py.     
 ```
 python3 create_splits.py --source ./data/waymo/training_and_validation/ --destination ./data/
 
@@ -210,12 +219,9 @@ Creating symlink for validation files
 Creating symlink for testing files
 
 ```
-
-
-This section should detail the cross validation strategy and justify your approach.
-Create the splits
-
-
+This script will first do a random shuffle on the filenames and split the data set into training = 75% , validation = 15% and testing = 10% of the data set files. The respective splits are then iterated over to create symlinks in the train , val and test folders under data folder.    
+We can see that there is a great class imbalance of cars vs bicycles vs  pedestrians. The random sampling will even out this distribution.Also we would want the train and validation dataset to have sample of images with varying conditions of light ,weather and driving scenarios.   
+I am creating symlinks here instead of moving or copying the files. Also downloaded 97 preprocessed files form classroom workspace waymo/training_and_validation folder. When using the classroom workspace unprocessed test dataset , we could split the data into 90% train and 10 % validate as an alternative.   
 
 ### Training
 #### Reference experiment
