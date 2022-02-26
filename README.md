@@ -153,7 +153,7 @@ cd nd013-c1-vision-starter
 ```
 #### Local Setup and Data
 **Note:Docker Setup**
-I am using local docker setup for this project. Please review and create a docker image as per above instructions. 
+I am using local docker setup for this project. Please review and create a docker image as per above instructions.   
 **Note:Data**
 For this project, I am using the preprocessed data from the classroom workspace. Open your classroom workspace , right click on the data folder and download it as a zip file. Extract the zip file to your local data folder.
 Create a data folder and save this data in training_and_validation folder.
