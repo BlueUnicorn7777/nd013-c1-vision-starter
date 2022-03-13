@@ -1,4 +1,9 @@
 *__pycache__
 *.ipynb_checkpoints/
 data/
-training/pretrained-models/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8/
+training/
+experiments/Experiment0/saved_model/variables/
+experiments/Experiment1/saved_model/variables/
+experiments/Experiment0/checkpoint/
+experiments/Experiment1/checkpoint/
+

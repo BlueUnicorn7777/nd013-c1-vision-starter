@@ -153,7 +153,9 @@ cd nd013-c1-vision-starter
 **Note:Docker Setup**    
 I am using local docker setup for this project. Please review and create a docker image as per above [instructions](### Local Setup).    
 **Note:Data**    
-For this project, I am using the preprocessed data from the classroom workspace. Open your classroom workspace , right click on the data folder and download it as a zip file. Extract the zip file to your local data folder.Create a data folder and save this data in training_and_validation folder.
+For this project, I am using the preprocessed data from the classroom workspace. Open your classroom workspace , right click on the data folder and download it as a zip file. Extract the zip file to your local data folder.Create a data folder and save this data in training_and_validation folder.    
+ 
+
 
 ```
 mkdir -p data/waymo/training_and_validation
@@ -171,17 +173,9 @@ Exploratory Data Analysis
 Run the following commands within the docker container. Copy the URI from the container and open it on a browser on host computer. You should see the juypter notebook. Open and run the notebook Exploratory Data Analysis.ipynb.
 
 ```
-cd app/project
+cd /app/project
 source jupyterrun.sh
 ```
-**Note:AttributeError**     
-AttributeError: module 'tensorflow.compat.v2.__internal__' has no attribute 'register_clear_session_function' 
-
-While running classroom docker container , I faced above error. As a work around I edited the /usr/local/lib/python3.8/dist-packages/keras/models.pyfile within the docker container.
-
-Modify line no 18   
-from – import tensorflow.compat.v2 as tf   
-to –     import tensorflow.compat.v1 as tf   
    
 **Image Quality**    
 Looking at the images , we can see that there are varying light conditions – bright day light  , dark  night with street lights and head lamps.
@@ -207,14 +201,15 @@ Create the splits
 To create data splits please run the below command in docker container specifying the --source and --destination directory arguments to the create_splits.py.     
 
 ```
-python3 create_splits.py --source ./data/waymo/training_and_validation/ --destination ./data/
+cd /app/project
+source create_split.sh
 
 2022-02-26 18:10:44,289 INFO     Creating splits...
 72 15 10
 Creating symlink for train files
 Creating symlink for validation files
 Creating symlink for testing files
-
+.....
 ```
 This script will first do a random shuffle on the filenames and split the data set into training = 75% , validation = 15% and testing = 10% of the data set files. The respective splits are then iterated over to create symlinks in the train , val and test folders under data folder.    
 We can see that there is a great class imbalance of cars vs bicycles vs  pedestrians. The random sampling will even out this distribution.Also we would want the train and validation dataset to have sample of images with varying conditions of light ,weather and driving scenarios.   
